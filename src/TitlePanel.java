@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -28,11 +30,14 @@ public class TitlePanel extends JPanel{
 	Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 	MyKeyListener myKeyListener;
 	SpeakerButton speakerButton;
+	
 	JButton creditButton;
+	MyButtonListener myButtonListener;
 	
 	public enum Menu{
 		START,
 		EXIT,
+		CREDIT,
 	}
 	
 	TitlePanel(){
@@ -106,11 +111,14 @@ public class TitlePanel extends JPanel{
 		
 		//リスナー
 		myKeyListener = new MyKeyListener(this);
+		myButtonListener = new MyButtonListener();
+		
+		creditButton.addActionListener(myButtonListener);
 	}
 	
-	public void showRuleDialogue() {
-		MySpeaker.playBGM("タイム");
-		String str = "";
+	public void showCreditDialogue() {
+		String str = "BGM\nDOVA-SYNDROME：https://dova-s.jp/"
+				+ "\nSE\n効果音ラボ：https://soundeffect-lab.info/";
 		JOptionPane.showOptionDialog(
 			this,
 			str,
@@ -121,6 +129,7 @@ public class TitlePanel extends JPanel{
 			new Object[] {"閉じる"},
 			"閉じる"
 		);
+		Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
 	}
 	
 	public class MyKeyListener implements KeyListener{
@@ -146,6 +155,7 @@ public class TitlePanel extends JPanel{
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
+			System.out.println("キー");
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_DOWN:
 				if(checkMenu == Menu.START) {
@@ -170,6 +180,17 @@ public class TitlePanel extends JPanel{
 				}
 				break;
 			}
+		}
+	}
+	
+	private class MyButtonListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			System.out.println("ボタン");
+			if(event.getSource() == creditButton) {
+				showCreditDialogue();
+			}
+			
 		}
 	}
 }
