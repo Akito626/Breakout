@@ -14,7 +14,7 @@ public class Main {
 			MySpeaker.soundWindow.setVisible(false);
 			MySpeaker.soundWindow.setLocation(1200, 150);
 			settingAllSounds();
-			MySpeaker.playBGM("ネコ");
+			MySpeaker.playBGM("タイム");
 		}catch(BasicPlayerException e) {
 			e.printStackTrace();
 		}
@@ -28,8 +28,7 @@ public class Main {
 	
 	public static void settingAllSounds() {
 		//曲
-		MySpeaker.st.addBGM("戦闘", "battle.mp3");
-		MySpeaker.st.addBGM("ネコ", "Cat_life.mp3");
+		MySpeaker.st.addBGM("タイム", "Timebend.mp3");
 		//SE
 		MySpeaker.st.addSE("シャキーン", "syakeen.mp3");
 		MySpeaker.st.addSE("爆発", "explode.mp3");
