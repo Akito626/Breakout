@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import mySpeaker.MySpeaker;
+
 public class GamePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
@@ -63,8 +65,7 @@ public class GamePanel extends JPanel{
 	}
 	
 	public void showRuleDialogue() {
-		JOptionPane optPane = new JOptionPane();
-		optPane.setSize(getPreferredSize());
+		MySpeaker.playBGM("タイム");
 		timer.stop();
 		fieldPanel.myBall.timer.stop();
 		String str = "・十字キーでパドルを操作できます。ボールを打ち返して"
@@ -223,6 +224,8 @@ public class GamePanel extends JPanel{
 				menuBar.miss = fieldPanel.miss;
 				menuBar.updateText();
 				if(fieldPanel.missCount == 3) {
+					MySpeaker.stopBGM("タイム");
+					MySpeaker.playBGM("終わり");
 					Main.mainWindow.gamePanel.showResultDialogue(menuBar.score);
 					Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
 				}
@@ -234,22 +237,25 @@ public class GamePanel extends JPanel{
 							if(fieldPanel.block[i][j].isVisible == false) {		//消えたらスコアを追加
 								fieldPanel.score += fieldPanel.block[i][j].score;
 								fieldPanel.blockCount--;
+								MySpeaker.playSE("破壊");
 							}
 						}
 					}
 				}
 				
+				//残りのブロックのカウント
 				if(fieldPanel.blockCount == 0) {
 					fieldPanel.setNextBlocks();
 				}
 				
+				//ボールが止まっているかの確認
 				if(fieldPanel.isStop) {
 					fieldPanel.isStop = false;
 					countdowntimer.start();
 					fieldPanel.timerLabel.setText("3");
-					System.out.println("トマッタ");
 				}
 				
+				//再度Rを押せるまでのカウント
 				if(permissR == false) {
 					permisscount--;
 					if(permisscount == 0) {

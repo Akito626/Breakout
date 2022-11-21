@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import mySpeaker.MySpeaker;
+
 public class FieldPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
@@ -162,12 +164,14 @@ public class FieldPanel extends JPanel{
 			if((ball.x + 5 == x4 && ball.y > y4 && ball.y < y4 + 50)
 					|| (ball.x == x3 + 10 && ball.y > y3 && ball.y < y3 + 50)) {
 				ball.xVelocity = ball.xVelocity *(-1);
+				MySpeaker.playSE("打つ");
 			}
 			
 			//上下のパドルで反射
 			if((ball.y + 5 == y2 && ball.x > x2 && ball.x < x2 + 50)
 					|| (ball.y == y1 + 10 && ball.x > x1 && ball.x < x1 + 50)) {
 				ball.yVelocity = ball.yVelocity *(-1);
+				MySpeaker.playSE("打つ");
 			}
 			
 			if(ball.x > Main.mainWindow.gamePanel.getWidth() - ball.getWidth() || ball.x < 0) {

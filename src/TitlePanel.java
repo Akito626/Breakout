@@ -5,11 +5,14 @@ import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import mySpeaker.MySpeaker;
 import mySpeaker.SpeakerButton;
 
 public class TitlePanel extends JPanel{
@@ -25,6 +28,7 @@ public class TitlePanel extends JPanel{
 	Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 	MyKeyListener myKeyListener;
 	SpeakerButton speakerButton;
+	JButton creditButton;
 	
 	public enum Menu{
 		START,
@@ -86,6 +90,11 @@ public class TitlePanel extends JPanel{
 		speakerButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("11_8bu_onpu.png")));
 		speakerButton.setLocation(730, 5);
 		
+		//クレジットボタン
+		creditButton = new JButton();
+		creditButton.setText("Credit");
+		creditButton.setBounds(680, 500, 80, 40);
+		
 		this.setLayout(null);
 		this.add(title);
 		this.add(start);
@@ -93,9 +102,25 @@ public class TitlePanel extends JPanel{
 		this.add(select);
 		this.add(message);
 		this.add(speakerButton);
+		this.add(creditButton);
 		
 		//リスナー
 		myKeyListener = new MyKeyListener(this);
+	}
+	
+	public void showRuleDialogue() {
+		MySpeaker.playBGM("タイム");
+		String str = "";
+		JOptionPane.showOptionDialog(
+			this,
+			str,
+			"Credit",
+			JOptionPane.DEFAULT_OPTION,
+			JOptionPane.PLAIN_MESSAGE,
+			null,
+			new Object[] {"閉じる"},
+			"閉じる"
+		);
 	}
 	
 	public class MyKeyListener implements KeyListener{
@@ -138,6 +163,7 @@ public class TitlePanel extends JPanel{
 				if(checkMenu == Menu.START) {
 					Main.mainWindow.gamePanel.resetGame();
 					Main.mainWindow.setFrontScreenAndFocus(ScreenMode.GAME);
+					MySpeaker.stopBGM("タイム");
 					Main.mainWindow.gamePanel.showRuleDialogue();
 				} else if(checkMenu == Menu.EXIT) {
 					System.exit(0);

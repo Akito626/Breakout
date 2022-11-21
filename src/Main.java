@@ -10,7 +10,7 @@ public class Main {
 		UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
 		
 		try {
-			MySpeaker.prepareSpeaker(50, 0);
+			MySpeaker.prepareSpeaker(100, 40);
 			MySpeaker.soundWindow.setVisible(false);
 			MySpeaker.soundWindow.setLocation(1200, 150);
 			settingAllSounds();
@@ -29,13 +29,12 @@ public class Main {
 	public static void settingAllSounds() {
 		//曲
 		MySpeaker.st.addBGM("タイム", "Timebend.mp3");
+		MySpeaker.st.addBGM("終わり", "gameover.mp3");
 		//SE
-		MySpeaker.st.addSE("シャキーン", "syakeen.mp3");
-		MySpeaker.st.addSE("爆発", "explode.mp3");
-		MySpeaker.st.addSE("チーン", "cheeen.mp3");
-		MySpeaker.st.addSE("キラキラ", "shining.mp3");
+		MySpeaker.st.addSE("破壊", "break.mp3");
+		MySpeaker.st.addSE("打つ", "strike.mp3");
 		//デフォルトSE
-		MySpeaker.setDefaultSE("シャキーン");
+		MySpeaker.setDefaultSE("破壊");
 	}
 
 }
