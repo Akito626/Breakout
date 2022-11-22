@@ -51,7 +51,7 @@ public class FieldPanel extends JPanel{
 	
 	boolean isStop = false;  //ボールが止まっているか
 	
-	int level = 3;  //ゲームの速度
+	int level = 1;  //ゲームの速度
 	
 	public FieldPanel() {
 		this.setBackground(Color.WHITE);
@@ -171,15 +171,15 @@ public class FieldPanel extends JPanel{
 			for(int i = 0; i < (double)level / 2; i++) {
 			
 				//左右のパドルで反射
-				if((ball.x + 5 == x4 && ball.y > y4 && ball.y < y4 + 50)
-						|| (ball.x == x3 + 10 && ball.y > y3 && ball.y < y3 + 50)) {
+				if((ball.x + 5 == x4 && ball.y + 5 > y4 && ball.y - 5< y4 + 50)
+						|| (ball.x == x3 + 10 && ball.y + 5 > y3 && ball.y - 5 < y3 + 50)) {
 					ball.xVelocity = ball.xVelocity *(-1);
 					MySpeaker.playSE("打つ");
 				}
 			
 				//上下のパドルで反射
-				if((ball.y + 5 == y2 && ball.x > x2 && ball.x < x2 + 50)
-						|| (ball.y == y1 + 10 && ball.x > x1 && ball.x < x1 + 50)) {
+				if((ball.y + 5 == y2 && ball.x + 5 > x2 && ball.x - 5 < x2 + 50)
+						|| (ball.y == y1 + 10 && ball.x + 5 > x1 && ball.x - 5 < x1 + 50)) {
 					ball.yVelocity = ball.yVelocity *(-1);
 					MySpeaker.playSE("打つ");
 				}

@@ -37,7 +37,6 @@ public class TitlePanel extends JPanel{
 	public enum Menu{
 		START,
 		EXIT,
-		CREDIT,
 	}
 	
 	TitlePanel(){
@@ -118,7 +117,8 @@ public class TitlePanel extends JPanel{
 	
 	public void showCreditDialogue() {
 		String str = "BGM\nDOVA-SYNDROME：https://dova-s.jp/"
-				+ "\nSE\n効果音ラボ：https://soundeffect-lab.info/";
+				+ "\nSE\n効果音ラボ：https://soundeffect-lab.info/"
+				+ "\nHowling-Indicator：https://howlingindicator.net";
 		JOptionPane.showOptionDialog(
 			this,
 			str,

@@ -137,6 +137,7 @@ public class GamePanel extends JPanel{
 			null,
 			0
 		);
+		MySpeaker.stopSE("終わり");
 		MySpeaker.playBGM("タイム");
 	}
 	
