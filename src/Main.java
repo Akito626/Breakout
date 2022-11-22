@@ -10,7 +10,7 @@ public class Main {
 		UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
 		
 		try {
-			MySpeaker.prepareSpeaker(100, 40);
+			MySpeaker.prepareSpeaker(100, 30);
 			MySpeaker.soundWindow.setVisible(false);
 			MySpeaker.soundWindow.setLocation(1200, 150);
 			settingAllSounds();

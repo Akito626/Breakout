@@ -17,12 +17,15 @@ public class MenuBar extends JPanel{
 	JButton homeButton;
 	JLabel scoreLabel;
 	JLabel missLabel;
+	JLabel levelLabel;
 	
 	HomeButtonListener homeButtonListener;
 	SpeakerButton speakerButton;
 	
-	int score = 0;
-	String miss = "";  //miss回数用
+	int score = 0;  //スコアカウント	
+	int level = 1;  //レベル
+	String miss = "";  //ミスカウント
+	
 	
 	public MenuBar() {
 		this.setPreferredSize(new Dimension(100, 40));  //コンポーネントサイズ用
@@ -35,12 +38,19 @@ public class MenuBar extends JPanel{
 		scoreLabel = new JLabel();
 		scoreLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
 		scoreLabel.setText("score : " + score);
-		scoreLabel.setBounds(250, 5, 150, 30);
+		scoreLabel.setBounds(150, 5, 150, 30);
 		
+		//ミス回数
 		missLabel = new JLabel();
 		missLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
 		missLabel.setText("miss : " + miss);
-		missLabel.setBounds(450, 5, 150, 30);
+		missLabel.setBounds(350, 5, 150, 30);
+		
+		//レベル
+		levelLabel = new JLabel();
+		levelLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
+		levelLabel.setText("Level : " + level);
+		levelLabel.setBounds(550, 5, 150, 30);
 		
 		//ホームボタン
 		homeButton = new JButton();
@@ -59,11 +69,13 @@ public class MenuBar extends JPanel{
 		this.add(speakerButton);
 		this.add(scoreLabel);
 		this.add(missLabel);
+		this.add(levelLabel);
 	}
 	
 	public void updateText() {
 		scoreLabel.setText("score : " + score);
 		missLabel.setText("miss : " + miss);
+		levelLabel.setText("Level : " + level);
 	}
 	
 	private class HomeButtonListener implements ActionListener{

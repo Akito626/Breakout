@@ -91,6 +91,8 @@ public class GamePanel extends JPanel{
 	
 	public void backToTitleDialogue() {
 		this.fieldPanel.myBall.timer.stop();
+		timer.stop();
+		countdowntimer.stop();
 		
 		String str = "タイトル画面に戻りますか?";
 		int responce = JOptionPane.showOptionDialog(
@@ -110,9 +112,11 @@ public class GamePanel extends JPanel{
 			Main.mainWindow.layout.show(Main.mainWindow.getContentPane(), "titlePanel");
 			Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
 		}else if(responce == JOptionPane.NO_OPTION) {
-			this.fieldPanel.myBall.timer.start();
+			timer.start();
+			countdowntimer.start();
 		}else if(responce == JOptionPane.CLOSED_OPTION) {
-			this.fieldPanel.myBall.timer.start();
+			timer.start();
+			countdowntimer.start();
 		}
 	}
 	
@@ -157,7 +161,7 @@ public class GamePanel extends JPanel{
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_DOWN:
 				if(fieldPanel.y3 + 50 < 525) {
-					for(int i = 0; i < pv; i++) {
+					for(int i = 0; i < pv * fieldPanel.level; i++) {
 						fieldPanel.y3 += 1;
 						fieldPanel.y4 += 1;
 						fieldPanel.myPaddle3.setLocation(fieldPanel.x3, fieldPanel.y3);
@@ -167,7 +171,7 @@ public class GamePanel extends JPanel{
 				break;
 			case KeyEvent.VK_UP:
 				if(fieldPanel.y3 > 0) {
-					for(int i = 0; i < pv; i++) {
+					for(int i = 0; i < pv * fieldPanel.level; i++) {
 						fieldPanel.y3 -= 1;
 						fieldPanel.y4 -= 1;
 						fieldPanel.myPaddle3.setLocation(fieldPanel.x3, fieldPanel.y3);
@@ -177,7 +181,7 @@ public class GamePanel extends JPanel{
 				break;
 			case KeyEvent.VK_RIGHT:
 				if(fieldPanel.x1 + 50 < 790) {
-					for(int i = 0; i < pv; i++) {
+					for(int i = 0; i < pv * fieldPanel.level; i++) {
 						fieldPanel.x1 += 1;
 						fieldPanel.x2 += 1;
 						fieldPanel.myPaddle1.setLocation(fieldPanel.x1, fieldPanel.y1);
@@ -187,7 +191,7 @@ public class GamePanel extends JPanel{
 				break;
 			case KeyEvent.VK_LEFT:
 				if(fieldPanel.x1 > 0) {
-					for(int i = 0; i < pv; i++) {
+					for(int i = 0; i < pv * fieldPanel.level; i++) {
 						fieldPanel.x1 -= 1;
 						fieldPanel.x2 -= 1;
 						fieldPanel.myPaddle1.setLocation(fieldPanel.x1, fieldPanel.y1);
@@ -196,13 +200,14 @@ public class GamePanel extends JPanel{
 				}
 				break;
 			case KeyEvent.VK_R:
-				if(permissR) {
+				//if(permissR) {
 					permissR = false;
+					fieldPanel.arrow.setVisible(false);
 					countdowntimer.start();
 					fieldPanel.resetBall();
 					fieldPanel.myBall.timer.stop();
 					fieldPanel.timerLabel.setText("3");
-				}
+				//}
 				break;
 			case KeyEvent.VK_H:
 				fieldPanel.myBall.timer.stop();
@@ -222,12 +227,14 @@ public class GamePanel extends JPanel{
 			if(e.getSource() == timer) {
 				menuBar.score = fieldPanel.score;
 				menuBar.miss = fieldPanel.miss;
+				menuBar.level = fieldPanel.level;
 				menuBar.updateText();
 				if(fieldPanel.missCount == 3) {
 					MySpeaker.stopBGM("タイム");
 					MySpeaker.playBGM("終わり");
 					Main.mainWindow.gamePanel.showResultDialogue(menuBar.score);
 					Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
+					MySpeaker.playBGM("タイム");
 				}
 				
 				for(int i = 0; i < fieldPanel.vb; i++) {

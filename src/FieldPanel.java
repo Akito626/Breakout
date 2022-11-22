@@ -49,7 +49,9 @@ public class FieldPanel extends JPanel{
 	int missCount = 0;
 	String miss = "";
 	
-	boolean isStop = false;
+	boolean isStop = false;  //ボールが止まっているか
+	
+	int level = 1;  //ゲームの速度
 	
 	public FieldPanel() {
 		this.setBackground(Color.WHITE);
@@ -60,7 +62,7 @@ public class FieldPanel extends JPanel{
 		cw = this.getWidth() / 2;
 		ch = this.getHeight() / 2;
 		
-		//パドルの設定
+		//パドルの生成
 		x1 = cw - 25;
 		myPaddle1 = new JLabel();
 		myPaddle1.setBackground(Color.BLACK);
@@ -101,6 +103,7 @@ public class FieldPanel extends JPanel{
 		sh = ch - bHeight* hb / 2;
 		generateBlocks();
 		
+		//カウントダウンラベル
 		timerLabel = new JLabel();
 		timerLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 50));
 		timerLabel.setBounds(cw, 50, 100, 100);
@@ -111,19 +114,22 @@ public class FieldPanel extends JPanel{
 		do {
 			myBall.x = new java.util.Random().nextInt(this.getWidth());
 			myBall.y = new java.util.Random().nextInt(this.getHeight());
-		}while((myBall.x - 5 < 100 || myBall.x + 5 > this.getWidth() - 100)  //ウィンドウの端に出ないように
-				&& (myBall.y - 5 < 100 || myBall.y + 5 > this.getHeight() - 100)
-				&& myBall.x + 5> sw && myBall.x - 5 < cw + (bWidth * vb / 2)   //ブロックの上に出ないように
-				&& myBall.y + 5 > sh && myBall.y - 5 < ch + (bHeight* hb / 2));
+		}while(((myBall.x - 5 < 50 || myBall.x + 5 > this.getWidth() - 50)  //ウィンドウの端に出ないように
+				|| (myBall.y - 5 < 50 || myBall.y + 5 > this.getHeight() - 50))
+				|| (myBall.x + 10> sw && myBall.x - 10 < cw + (bWidth * vb / 2)   //ブロックの上に出ないように
+				&& myBall.y + 10 > sh && myBall.y - 10 < ch + (bHeight* hb / 2)));
 		
 		do {
-			myBall.xVelocity = new java.util.Random().nextInt(2) - 1;  //-1か1
-			myBall.yVelocity = new java.util.Random().nextInt(2) - 1;  //-1か1
+			myBall.xVelocity = (new java.util.Random().nextInt(3) - 1) * level;  //-1か1
+			myBall.yVelocity = (new java.util.Random().nextInt(3) - 1) * level;  //-1か1
 		}while(myBall.xVelocity == 0 || myBall.yVelocity == 0);
 		myBall.setLocation(myBall.x, myBall.y);
+		
+		//ボールの進行方向の表示
 		arrow = new Arrow(myBall);
 		this.add(arrow);
 		arrow.setVisible(true);
+		arrow.repaint();
 	}
 	
 	public void generateBlocks() {
@@ -149,6 +155,7 @@ public class FieldPanel extends JPanel{
 				blockCount = vb * hb;
 			}
 		}
+		level++;
 	}
 	
 	private class BallActionListener implements ActionListener{
