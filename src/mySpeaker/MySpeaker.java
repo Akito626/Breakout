@@ -48,6 +48,7 @@ public class MySpeaker {
 	public static void stopBGM(String key) {
 		try {
 			soundWindow.soundPanel.playerOfBGM.stop();
+			soundWindow.soundPanel.bgmLoopMonitorTimer.stop();
 		}catch (BasicPlayerException e) {
 			System.out.println("stopBGMメソッドでエラーが発生しています");
 		}
