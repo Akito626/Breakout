@@ -147,6 +147,7 @@ public class FieldPanel extends JPanel{
 		}
 	}
 	
+	//ブロックの再配置
 	public void setNextBlocks() {
 		for(int i = 0; i < vb; i++) {
 			for(int j = 0; j < hb; j++) {
@@ -169,37 +170,37 @@ public class FieldPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			for(int i = 0; i < (double)level / 2; i++) {
 			
-			//左右のパドルで反射
-			if((ball.x + 5 == x4 && ball.y > y4 && ball.y < y4 + 50)
-					|| (ball.x == x3 + 10 && ball.y > y3 && ball.y < y3 + 50)) {
-				ball.xVelocity = ball.xVelocity *(-1);
-				MySpeaker.playSE("打つ");
-			}
+				//左右のパドルで反射
+				if((ball.x + 5 == x4 && ball.y > y4 && ball.y < y4 + 50)
+						|| (ball.x == x3 + 10 && ball.y > y3 && ball.y < y3 + 50)) {
+					ball.xVelocity = ball.xVelocity *(-1);
+					MySpeaker.playSE("打つ");
+				}
 			
-			//上下のパドルで反射
-			if((ball.y + 5 == y2 && ball.x > x2 && ball.x < x2 + 50)
-					|| (ball.y == y1 + 10 && ball.x > x1 && ball.x < x1 + 50)) {
-				ball.yVelocity = ball.yVelocity *(-1);
-				MySpeaker.playSE("打つ");
-			}
+				//上下のパドルで反射
+				if((ball.y + 5 == y2 && ball.x > x2 && ball.x < x2 + 50)
+						|| (ball.y == y1 + 10 && ball.x > x1 && ball.x < x1 + 50)) {
+					ball.yVelocity = ball.yVelocity *(-1);
+					MySpeaker.playSE("打つ");
+				}
 			
-			//ミスのカウント
-			if(ball.x > Main.mainWindow.gamePanel.getWidth() - ball.getWidth() || ball.x < 0) {
-				missCount++;
-				miss += "×";
-				ball.timer.stop();
-				isStop = true;
-				resetBall();
-			}
-			if(ball.y > Main.mainWindow.gamePanel.getHeight() - ball.getHeight() - 40|| ball.y < 0) {
-				missCount++;
-				miss += "×";
-				ball.timer.stop();
-				isStop = true;
-				resetBall();
-			}
+				//ミスのカウント
+				if(ball.x > Main.mainWindow.gamePanel.getWidth() - ball.getWidth() || ball.x < 0) {
+					missCount++;
+					miss += "×";
+					ball.timer.stop();
+					isStop = true;
+					resetBall();
+				}
+				if(ball.y > Main.mainWindow.gamePanel.getHeight() - ball.getHeight() - 40|| ball.y < 0) {
+					missCount++;
+					miss += "×";
+					ball.timer.stop();
+					isStop = true;
+					resetBall();
+				}
 			
-			//ボールの移動
+				//ボールの移動
 				ball.x = ball.x + ball.xVelocity;
 				ball.y = ball.y + ball.yVelocity;
 				ball.setLocation(ball.x, ball.y);

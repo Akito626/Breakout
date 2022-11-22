@@ -121,6 +121,8 @@ public class GamePanel extends JPanel{
 	}
 	
 	public void showResultDialogue(int point) {
+		MySpeaker.stopBGM("タイム");
+		MySpeaker.playSE("終わり");
 		timer.stop();
 		fieldPanel.isStop = false;
 		fieldPanel.myBall.timer.stop();
@@ -135,6 +137,7 @@ public class GamePanel extends JPanel{
 			null,
 			0
 		);
+		MySpeaker.playBGM("タイム");
 	}
 	
 	private class MyKeyListener implements KeyListener{
@@ -200,14 +203,14 @@ public class GamePanel extends JPanel{
 				}
 				break;
 			case KeyEvent.VK_R:
-				//if(permissR) {
+				if(permissR) {
 					permissR = false;
 					fieldPanel.arrow.setVisible(false);
 					countdowntimer.start();
 					fieldPanel.resetBall();
 					fieldPanel.myBall.timer.stop();
 					fieldPanel.timerLabel.setText("3");
-				//}
+				}
 				break;
 			case KeyEvent.VK_H:
 				fieldPanel.myBall.timer.stop();
@@ -230,25 +233,9 @@ public class GamePanel extends JPanel{
 				menuBar.level = fieldPanel.level;
 				menuBar.updateText();
 				if(fieldPanel.missCount == 3) {
-					MySpeaker.stopBGM("タイム");
-					MySpeaker.playSE("終わり");
 					Main.mainWindow.gamePanel.showResultDialogue(menuBar.score);
 					Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
-					MySpeaker.playBGM("タイム");
 				}
-				
-				/*for(int i = 0; i < fieldPanel.vb; i++) {
-					for(int j = 0; j < fieldPanel.hb; j++) {
-						if(fieldPanel.block[i][j].isVisible == true) {		//ある時は処理を行う
-							fieldPanel.block[i][j].collision(fieldPanel.myBall);
-							if(fieldPanel.block[i][j].isVisible == false) {		//消えたらスコアを追加
-								fieldPanel.score += fieldPanel.block[i][j].score;
-								fieldPanel.blockCount--;
-								MySpeaker.playSE("破壊");
-							}
-						}
-					}
-				}*/
 				
 				//残りのブロックのカウント
 				if(fieldPanel.blockCount == 0) {
