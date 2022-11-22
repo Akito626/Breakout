@@ -155,7 +155,6 @@ public class TitlePanel extends JPanel{
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.println("キー");
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_DOWN:
 				if(checkMenu == Menu.START) {
@@ -186,7 +185,6 @@ public class TitlePanel extends JPanel{
 	private class MyButtonListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			System.out.println("ボタン");
 			if(event.getSource() == creditButton) {
 				showCreditDialogue();
 			}

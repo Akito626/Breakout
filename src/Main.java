@@ -29,10 +29,10 @@ public class Main {
 	public static void settingAllSounds() {
 		//曲
 		MySpeaker.st.addBGM("タイム", "Timebend.mp3");
-		MySpeaker.st.addBGM("終わり", "gameover.mp3");
 		//SE
 		MySpeaker.st.addSE("破壊", "break.mp3");
 		MySpeaker.st.addSE("打つ", "strike.mp3");
+		MySpeaker.st.addSE("終わり", "gameover.mp3");
 		//デフォルトSE
 		MySpeaker.setDefaultSE("破壊");
 	}

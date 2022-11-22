@@ -231,13 +231,13 @@ public class GamePanel extends JPanel{
 				menuBar.updateText();
 				if(fieldPanel.missCount == 3) {
 					MySpeaker.stopBGM("タイム");
-					MySpeaker.playBGM("終わり");
+					MySpeaker.playSE("終わり");
 					Main.mainWindow.gamePanel.showResultDialogue(menuBar.score);
 					Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
 					MySpeaker.playBGM("タイム");
 				}
 				
-				for(int i = 0; i < fieldPanel.vb; i++) {
+				/*for(int i = 0; i < fieldPanel.vb; i++) {
 					for(int j = 0; j < fieldPanel.hb; j++) {
 						if(fieldPanel.block[i][j].isVisible == true) {		//ある時は処理を行う
 							fieldPanel.block[i][j].collision(fieldPanel.myBall);
@@ -248,7 +248,7 @@ public class GamePanel extends JPanel{
 							}
 						}
 					}
-				}
+				}*/
 				
 				//残りのブロックのカウント
 				if(fieldPanel.blockCount == 0) {

@@ -23,7 +23,6 @@ public class Arrow extends JPanel{
 			this.setBounds(ball.x + 12, ball.y + 12, 21, 21);
 			direction = 3;
 		}
-		System.out.println(direction);
 	}
 	
 	@Override

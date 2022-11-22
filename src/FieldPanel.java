@@ -51,7 +51,7 @@ public class FieldPanel extends JPanel{
 	
 	boolean isStop = false;  //ボールが止まっているか
 	
-	int level = 1;  //ゲームの速度
+	int level = 3;  //ゲームの速度
 	
 	public FieldPanel() {
 		this.setBackground(Color.WHITE);
@@ -120,8 +120,8 @@ public class FieldPanel extends JPanel{
 				&& myBall.y + 10 > sh && myBall.y - 10 < ch + (bHeight* hb / 2)));
 		
 		do {
-			myBall.xVelocity = (new java.util.Random().nextInt(3) - 1) * level;  //-1か1
-			myBall.yVelocity = (new java.util.Random().nextInt(3) - 1) * level;  //-1か1
+			myBall.xVelocity = (new java.util.Random().nextInt(3) - 1);  //-1か1
+			myBall.yVelocity = (new java.util.Random().nextInt(3) - 1);  //-1か1
 		}while(myBall.xVelocity == 0 || myBall.yVelocity == 0);
 		myBall.setLocation(myBall.x, myBall.y);
 		
@@ -167,6 +167,8 @@ public class FieldPanel extends JPanel{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			for(int i = 0; i < (double)level / 2; i++) {
+			
 			//左右のパドルで反射
 			if((ball.x + 5 == x4 && ball.y > y4 && ball.y < y4 + 50)
 					|| (ball.x == x3 + 10 && ball.y > y3 && ball.y < y3 + 50)) {
@@ -181,6 +183,7 @@ public class FieldPanel extends JPanel{
 				MySpeaker.playSE("打つ");
 			}
 			
+			//ミスのカウント
 			if(ball.x > Main.mainWindow.gamePanel.getWidth() - ball.getWidth() || ball.x < 0) {
 				missCount++;
 				miss += "×";
@@ -195,10 +198,27 @@ public class FieldPanel extends JPanel{
 				isStop = true;
 				resetBall();
 			}
-			ball.x = ball.x + ball.xVelocity;
-			ball.y = ball.y + ball.yVelocity;
-			ball.setLocation(ball.x, ball.y);
-			ball.repaint();
+			
+			//ボールの移動
+				ball.x = ball.x + ball.xVelocity;
+				ball.y = ball.y + ball.yVelocity;
+				ball.setLocation(ball.x, ball.y);
+				ball.repaint();
+				
+				//ブロックの破壊処理
+				for(int j = 0; j < vb; j++) {
+					for(int k = 0; k < hb; k++) {
+						if(block[j][k].isVisible == true) {		//ある時は処理を行う
+							block[j][k].collision(myBall);
+							if(block[j][k].isVisible == false) {		//消えたらスコアを追加
+								score += block[j][k].score * level;
+								blockCount--;
+								MySpeaker.playSE("破壊");
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
