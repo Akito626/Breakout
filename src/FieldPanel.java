@@ -149,6 +149,9 @@ public class FieldPanel extends JPanel{
 	
 	//ブロックの再配置
 	public void setNextBlocks() {
+		myBall.timer.stop();
+		isStop = true;
+		resetBall();
 		for(int i = 0; i < vb; i++) {
 			for(int j = 0; j < hb; j++) {
 				block[i][j].isVisible = true;
