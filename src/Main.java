@@ -1,4 +1,8 @@
+import java.io.IOException;
+
 import javax.swing.UIManager;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 import mySpeaker.MySpeaker;
@@ -6,7 +10,7 @@ import mySpeaker.MySpeaker;
 public class Main {
 	static MainWindow mainWindow;
 	static MySpeaker myspeaker;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JsonProcessingException, IOException {
 		UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
 		
 		try {

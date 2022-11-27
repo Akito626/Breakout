@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -49,6 +54,8 @@ public class GamePanel extends JPanel{
 		
 		countdowntimer = new Timer(1000, myActionListener);
 		countdowntimer.stop();
+		
+		loadScore();
 	}
 	
 	public void resetGame() {
@@ -62,6 +69,7 @@ public class GamePanel extends JPanel{
 		permissR = true;
 		fieldPanel.isStop = false;
 		menuBar.updateText();
+		loadScore();
 	}
 	
 	public void showRuleDialogue() {
@@ -141,6 +149,45 @@ public class GamePanel extends JPanel{
 		MySpeaker.playBGM("タイム");
 	}
 	
+	public void saveFiledDialogue() {
+		String str = "スコアのセーブに失敗しました";
+		JOptionPane.showOptionDialog(
+			this,
+			str,
+			"result",
+			JOptionPane.DEFAULT_OPTION,
+			JOptionPane.PLAIN_MESSAGE,
+			null,
+			null,
+			0
+		);
+	}
+	
+	public void loadScore() {
+		Path p = Paths.get("./save.txt");
+		
+		try {
+			String str = Files.readString(p);
+			menuBar.highscore = Integer.parseInt(str);
+			menuBar.updateText();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveScore(){
+		String str = String.valueOf(menuBar.score);
+		
+		try {
+			PrintWriter pw = new PrintWriter("./save.txt");
+			pw.write(str);
+			pw.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+			saveFiledDialogue();
+		}
+	}
+	
 	private class MyKeyListener implements KeyListener{
 		JPanel panel;
 		
@@ -217,8 +264,9 @@ public class GamePanel extends JPanel{
 				fieldPanel.myBall.timer.stop();
 				countdowntimer.stop();
 				Main.mainWindow.gamePanel.backToTitleDialogue();
-				break;
+				break;	
 			}
+			
 		}
 	}
 	
@@ -232,8 +280,12 @@ public class GamePanel extends JPanel{
 				menuBar.score = fieldPanel.score;
 				menuBar.miss = fieldPanel.miss;
 				menuBar.level = fieldPanel.level;
+				if(menuBar.score > menuBar.highscore) {
+					menuBar.highscore = menuBar.score;
+				}
 				menuBar.updateText();
 				if(fieldPanel.missCount == 3) {
+					saveScore();
 					Main.mainWindow.gamePanel.showResultDialogue(menuBar.score);
 					Main.mainWindow.setFrontScreenAndFocus(ScreenMode.TITLE);
 				}

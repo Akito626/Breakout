@@ -11,11 +11,12 @@ import javax.swing.JPanel;
 
 import mySpeaker.SpeakerButton;
 
-public class MenuBar extends JPanel{
+public class MenuBar extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	JButton homeButton;
 	JLabel scoreLabel;
+	JLabel highscoreLabel;
 	JLabel missLabel;
 	JLabel levelLabel;
 	
@@ -23,6 +24,7 @@ public class MenuBar extends JPanel{
 	SpeakerButton speakerButton;
 	
 	int score = 0;  //スコアカウント	
+	int highscore = 0;  //ハイスコア
 	int level = 1;  //レベル
 	String miss = "";  //ミスカウント
 	
@@ -38,19 +40,25 @@ public class MenuBar extends JPanel{
 		scoreLabel = new JLabel();
 		scoreLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
 		scoreLabel.setText("score : " + score);
-		scoreLabel.setBounds(150, 5, 150, 30);
+		scoreLabel.setBounds(100, 5, 150, 30);
+		
+		//ハイスコア
+		highscoreLabel = new JLabel();
+		highscoreLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
+		highscoreLabel.setText("highscore : " + highscore);
+		highscoreLabel.setBounds(250, 5, 150, 30);
 		
 		//ミス回数
 		missLabel = new JLabel();
 		missLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
 		missLabel.setText("miss : " + miss);
-		missLabel.setBounds(350, 5, 150, 30);
+		missLabel.setBounds(450, 5, 150, 30);
 		
 		//レベル
 		levelLabel = new JLabel();
 		levelLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
 		levelLabel.setText("Level : " + level);
-		levelLabel.setBounds(550, 5, 150, 30);
+		levelLabel.setBounds(600, 5, 150, 30);
 		
 		//ホームボタン
 		homeButton = new JButton();
@@ -68,12 +76,14 @@ public class MenuBar extends JPanel{
 		this.add(homeButton);
 		this.add(speakerButton);
 		this.add(scoreLabel);
+		this.add(highscoreLabel);
 		this.add(missLabel);
 		this.add(levelLabel);
 	}
 	
 	public void updateText() {
 		scoreLabel.setText("score : " + score);
+		highscoreLabel.setText("highscore : " + highscore);
 		missLabel.setText("miss : " + miss);
 		levelLabel.setText("Level : " + level);
 	}

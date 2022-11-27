@@ -17,5 +17,8 @@
 	<classpathentry kind="lib" path="D:/Eclipse/ライブラリ/BasicPlayer3.0/lib/mp3spi1.9.4.jar"/>
 	<classpathentry kind="lib" path="D:/Eclipse/ライブラリ/BasicPlayer3.0/lib/tritonus_share.jar"/>
 	<classpathentry kind="lib" path="D:/Eclipse/ライブラリ/BasicPlayer3.0/lib/vorbisspi1.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse/ライブラリ/Jackson/jackson-annotations-2.14.1.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse/ライブラリ/Jackson/jackson-core-2.14.1.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse/ライブラリ/Jackson/jackson-databind-2.14.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
