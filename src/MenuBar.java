@@ -46,7 +46,7 @@ public class MenuBar extends JPanel {
 		highscoreLabel = new JLabel();
 		highscoreLabel.setFont(new Font("ＭＳ ゴシック", Font.BOLD, 18));
 		highscoreLabel.setText("highscore : " + highscore);
-		highscoreLabel.setBounds(250, 5, 150, 30);
+		highscoreLabel.setBounds(250, 5, 200, 30);
 		
 		//ミス回数
 		missLabel = new JLabel();

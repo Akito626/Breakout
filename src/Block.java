@@ -28,14 +28,12 @@ public class Block extends JPanel{
 	
 	public void collision(MyBall ball) {
 		if(isVisible == true) {
-			if(ball.x > bx && ball.x < bx + bw 
-					&& ((ball.y + 5 == by && ball.yVelocity > 0) || (ball.y - 5 == by + bh && ball.yVelocity < 0))){
+			if(ball.x > bx && ball.x < bx + bw && ball.y + 5 > by && ball.y - 5 < by + bh) {
 				ball.yVelocity = ball.yVelocity *(-1); 
 				isVisible = false;
 				setVisible(isVisible);
 			}
-			if(ball.y > by && ball.y < by + bh 
-					&& ((ball.x + 5 == bx && ball.xVelocity > 0) || (ball.x - 5 == bx + bw && ball.xVelocity < 0))) {
+			if(ball.x + 5 > bx && ball.x - 5 < bx + bw && ball.y > by && ball.y < by + bh) {
 				ball.xVelocity = ball.xVelocity *(-1); 
 				isVisible = false;
 				setVisible(isVisible);
