@@ -46,14 +46,16 @@ public class TitlePanel extends JPanel{
 	
 	public void prepareComponents() {
 		title = new JLabel();
-		//ImageIcon titleLogo = new ImageIcon(getClass(), getClassLoader().getResource("title.png"));  //タイトル画面(600×300)
+		ImageIcon titleLogo = new ImageIcon(getClass().getClassLoader().getResource("Breakout.png"));  //タイトル画面(600×300)
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setVerticalAlignment(SwingConstants.BOTTOM);
-		title.setText("Created by 【AKITO】");
+		title.setIcon(titleLogo);
+		//title.setText("Created by 【AKITO】");
 		title.setHorizontalTextPosition(JLabel.CENTER);
 		title.setVerticalTextPosition(SwingConstants.BOTTOM);
 		title.setBounds(90, 0, 600, 350);
 		title.setBorder(border);
+		title.setBackground(Color.white);
 		
 		//選択肢
 		start = new JLabel();
